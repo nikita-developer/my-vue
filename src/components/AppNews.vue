@@ -4,27 +4,32 @@
             <h6>
                 {{title}}
             </h6>
-            <button 
-                class="btn btn-outline-success btn-sm pt-2"
-                @click="open">
-                {{isNewsOpen ? 'Close' : 'Open'}}
-            </button>
-            <button 
+            <AppButton 
+                color="btn-outline-success" 
+                @action="open"
+            >{{isNewsOpen ? 'Close' : 'Open'}}</AppButton>
+            <AppButton 
                 v-if="wasRead"
-                class="btn btn-danger"
-                @click="$emit('unmark', id)">
-                Не прочитано
-            </button>
+                color="btn-outline-danger"
+                @click="$emit('unmark', id)"
+            >Не прочитано</AppButton>
             <div v-if="isNewsOpen">
                 <hr/>
                 <p >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor pariatur atque odio exercitationem sapiente magni, accusantium nostrum ut mollitia nisi.</p>
-                <button v-if="!wasRead" @click="mark" class="btn btn-primary">Прочесть новость</button>
+                <AppButton 
+                    v-if="!wasRead" 
+                    @click="mark" 
+                    color="btn-outline-success"
+                >Прочесть новость</AppButton>
+                <AppNewsList />
             </div>
         </li>
     </ul>
 </template>
 
 <script>
+    import AppButton from './AppButton.vue'
+    import AppNewsList from './AppNewsList.vue'
     export default {
         props: {
             title: {
@@ -74,9 +79,7 @@
                 this.isNewsOpen = false
                 this.$emit('readNews', this.id)
             },
-            // unmark() {
-            //     this.$emit('unmark', this.id)
-            // }
-        }
+        },
+        components: {AppButton, AppNewsList}
     }
 </script>
