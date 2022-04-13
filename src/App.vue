@@ -1,79 +1,102 @@
 <template>
-	<div>
-		<form @submit.prevent="submit">
-			<div class="form-row">
-				<div class="col-md-4 mb-3">
-					<label for="validationServer01">First name</label>
+	<div class="container">
+		<AppAlert :alert="alert" @close="alert = null"/>
+		<div class="card p-2 mb-3">
+			<h6>Работа с базой данных</h6>
+			<form 
+				class="form-group"
+				@submit.prevent="createPerson"
+			>
+				<div class="form-group pb-3">
+					<label for="exampleFormControlInput1"><small>Введите имя</small></label>
 					<input 
-						name="name" 
-						type="text" 
-						class="form-control"
-						:class="{'is-invalid': !errors.name, 'is-valid': errors.name}" 
-						id="validationServer01" 
-						placeholder="First name"
-						v-model="name"
+						type="name" 
+						class="form-control" 
+						id="exampleFormControlInput1"
+						v-model.trim="name"
 					>
-					<div v-if="errors.name" class="valid-feedback">{{errors.name}}</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="form-check">
-					<input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
-					<label class="form-check-label" for="invalidCheck3">
-						Agree to terms and conditions
-					</label>
-					<div class="invalid-feedback">
-						You must agree before submitting.
-					</div>
-				</div>
-			</div>
-			<button class="btn btn-primary">Submit form</button>
-		</form>
+				<button class="btn btn-primary" :disabled="name.length === 0">Создать человека</button>
+			</form>
+		</div>
+		<AppPeopleList
+			:people="people"
+			@load="loadPeople"
+			@remove="removePerson"
+		/>
 	</div>
 </template>
 
 <script>
+	import AppPeopleList from './components/AppPeopleList.vue'
+	import AppAlert from './components/AppAlert.vue'
+	import axios from 'axios'
+
 	export default {
 		data() {
 			return {
 				name: '',
-				errors: {
-					name: null,
-				}
+				people: [],
+				alert: null,
 			}
 		},
+		mounted() {
+			this.loadPeople()
+		},
 		methods: {
-			submit() {
-				if(this.valid()) {
-					console.log('24');
-				}
+			async createPerson() {
+				const response = await fetch('https://vue-with-http-30bc6-default-rtdb.firebaseio.com/people.json', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						firstName: this.name,
+					})
+				})
+
+				const firebaseData = await response.json()
+
+				this.people.push({
+					firstName: this.name,
+					id: firebaseData.name
+				})
+				this.name = ''
 			},
-			valid() {
-				let isValid = true
-				if(this.name !== '') {
-					isValid = false
-					this.errors.name = 'Введите имя'
-				} else {
-					this.errors.name = null
+			async loadPeople() {
+				try {
+					const {data} = await axios.get('https://vue-with-http-30bc6-default-rtdb.firebaseio.com/people.json')
+					if(!data) {
+						throw new Error('Список людей пуст')
+					}
+					this.people = Object.keys(data).map(key => {
+						return {
+							id: key,
+							...data[key]
+						}
+					})
+				} catch (e) {
+					this.alert = {
+						type: 'danger',
+						title: 'Ошибка',
+						text: e.message,
+					}
+					console.log(e.message);
 				}
-				return isValid
+				
+			},
+			async removePerson(id) {
+				await axios.delete(`https://vue-with-http-30bc6-default-rtdb.firebaseio.com/people/${id}.json`)
+				this.people = this.people.filter(person => person.id !== id)
 			}
+		},
+		components: {
+			AppPeopleList,
+			AppAlert
 		}
 	}
 </script>
 
 <style>
-	small {
-		color: red;
-	}
 
-	select,
-	input,
-	button {
-		width: 100%;
-	}
-
-	.error {
-		border: 1px solid red;
-	}
 </style>
