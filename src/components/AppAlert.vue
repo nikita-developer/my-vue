@@ -21,4 +21,17 @@
 		border-left: 5px solid #0d6efd;
 		border-left-color: #dc3545;
 	}
+	.alert.primary {
+		border-left-color: #0d6efd;
+	}
+
+	.alert.primary .btn {
+		color: #0d6efd;
+		border-color: #0d6efd;
+	}
+
+	.alert.primary .btn:hover {
+		color: #fff;
+		background-color: #0d6efd;
+	}
 </style>
