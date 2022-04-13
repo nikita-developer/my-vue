@@ -1,120 +1,85 @@
 <template>
 	<div class="container">
-		<AppAlert :alert="alert" @close="alert = null"/>
-		<div class="card p-2 mb-3">
-			<h6>Работа с базой данных</h6>
-			<form 
-				class="form-group"
-				@submit.prevent="createPerson"
-			>
-				<div class="form-group pb-3">
-					<label for="exampleFormControlInput1"><small>Введите имя</small></label>
-					<input 
-						type="name" 
-						class="form-control" 
-						id="exampleFormControlInput1"
-						v-model.trim="name"
-					>
+		<div class="page">
+			<div class="summary">
+				<div class="aside">
+					<form @submit.prevent="submit">
+						<div class="form-group mb-2">
+							<label for="exampleFormControlSelect1"><small>Тип блока</small></label>
+							<select 
+								class="form-control" 
+								id="exampleFormControlSelect1"
+								v-model="selectType">
+								<option value="Заголовок">Заголовок</option>
+								<option value="Подзаголовок">Подзаголовок</option>
+								<option value="Аватар">Аватар</option>
+								<option value="Текст">Текст</option>
+							</select>
+						</div>
+						<div class="form-group mb-2">
+							<label for="exampleFormControlTextarea1"><small>Значение блока</small></label>
+							<textarea 
+								class="form-control" 
+								id="exampleFormControlTextarea1" rows="3"
+								v-model="textareaType"></textarea>
+						</div>
+						<button class="btn btn-primary btn-sm w-100">Добавить</button>
+					</form>
 				</div>
-				<button class="btn btn-primary" :disabled="name.length === 0">Создать человека</button>
-			</form>
+				<div class="main">
+					<AppSummary :title="summary" />
+				</div>
+			</div>
 		</div>
-		<AppLoader v-if="loading" />
-		<AppPeopleList
-			v-else
-			:people="people"
-			@load="loadPeople"
-			@remove="removePerson"
-		/>
 	</div>
 </template>
 
 <script>
-	import AppPeopleList from './components/AppPeopleList.vue'
-	import AppAlert from './components/AppAlert.vue'
-	import AppLoader from './components/AppLoader.vue'
-	import axios from 'axios'
-
+	import AppSummary from './AppSummary.vue'
 	export default {
 		data() {
 			return {
-				name: '',
-				people: [],
-				alert: null,
-				loading: false,
+				selectType: 'Заголовок',
+				textareaType: '',
+				summary: [],
 			}
 		},
-		mounted() {
-			this.loadPeople()
-		},
 		methods: {
-			async createPerson() {
-				const response = await fetch('https://vue-with-http-30bc6-default-rtdb.firebaseio.com/people.json', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						firstName: this.name,
-					})
+			submit() {
+				this.summary.push({
+					thems: this.selectType,
+					content: this.textareaType,
 				})
-
-				const firebaseData = await response.json()
-
-				this.people.push({
-					firstName: this.name,
-					id: firebaseData.name
-				})
-				this.name = ''
-			},
-			loadPeople() {
-				this.loading = true
-				setTimeout(async () => {
-					try {
-						const {data} = await axios.get('https://vue-with-http-30bc6-default-rtdb.firebaseio.com/people.json')
-						if(!data) {
-							throw new Error('Список людей пуст')
-						}
-						this.people = Object.keys(data).map(key => {
-							return {
-								id: key,
-								...data[key]
-							}
-						})
-						this.loading = false
-					} catch (e) {
-						this.alert = {
-							type: 'danger',
-							title: 'Ошибка',
-							text: e.message,
-						}
-						this.loading = false
-					}
-				}, 600)
-			},
-			async removePerson(id) {
-				try {
-					const name = this.people.find(person => person.id === id).firstName
-					await axios.delete(`https://vue-with-http-30bc6-default-rtdb.firebaseio.com/people/${id}.json`)
-					this.people = this.people.filter(person => person.id !== id)
-					this.alert = {
-						type: 'primary',
-						title: 'Успешно!',
-						text: 'Пользователь с именем '+name+' был удален!',
-					}
-				} catch(e) {
-					console.log(e);
-				}
 			}
 		},
 		components: {
-			AppPeopleList,
-			AppAlert,
-			AppLoader,
+			AppSummary
 		}
 	}
 </script>
 
 <style>
+	body {
+		background-color: #4d3256 !important;
+	}
 
+	.summary {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.aside {
+		flex: 0 0 200px;
+		padding: 15px;
+		background-color: #fff;
+		border-radius: 10px;
+		margin-right: 15px;
+	}
+
+	.main {
+		flex-grow: 1;
+		padding: 15px;
+		background-color: #fff;
+		border-radius: 10px;
+	}
 </style>
