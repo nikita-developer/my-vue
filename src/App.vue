@@ -23,13 +23,18 @@
 								id="exampleFormControlTextarea1" rows="3"
 								v-model="textareaType"></textarea>
 						</div>
-						<button class="btn btn-primary btn-sm w-100">Добавить</button>
+						<button 
+							:disabled="disabled" 
+							class="btn btn-primary btn-sm w-100"
+						>Добавить</button>
 					</form>
 				</div>
 				<div class="main">
-					<AppSummary :title="summary" />
+					<AppSummary :summary="summary" />
 				</div>
 			</div>
+			<button class="btn btn-primary w-100">Загрузить комментария</button>
+			
 		</div>
 	</div>
 </template>
@@ -42,6 +47,7 @@
 				selectType: 'Заголовок',
 				textareaType: '',
 				summary: [],
+				disabled: true,
 			}
 		},
 		methods: {
@@ -50,10 +56,17 @@
 					thems: this.selectType,
 					content: this.textareaType,
 				})
+				this.selectType = 'Заголовок'
+				this.textareaType = ''
 			}
 		},
 		components: {
 			AppSummary
+		},
+		watch: {
+			textareaType: function() {
+				this.textareaType.length > 3 ? this.disabled = false : this.disabled = true 
+			}
 		}
 	}
 </script>
@@ -65,7 +78,7 @@
 
 	.summary {
 		display: flex;
-		flex-wrap: wrap;
+		margin-bottom: 15px;
 	}
 
 	.aside {
@@ -81,5 +94,11 @@
 		padding: 15px;
 		background-color: #fff;
 		border-radius: 10px;
+	}
+
+	.comments {
+		background-color: #fff;
+		border-radius: 10px;
+		padding: 15px;
 	}
 </style>
