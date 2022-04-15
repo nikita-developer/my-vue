@@ -33,14 +33,25 @@
 					<AppSummary :summary="summary" />
 				</div>
 			</div>
-			<button class="btn btn-primary w-100">Загрузить комментария</button>
-			
+			<button v-if="!showCommits" @click="getCommits" class="btn btn-primary w-100">Загрузить комментария</button>
+			<div v-if="showCommits">
+				<div v-if="isLoading">
+					<div class="loading">
+						Loading...
+					</div>
+				</div>
+				<div v-else>
+					<AppCommits :commits="commits" />
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 	import AppSummary from './AppSummary.vue'
+	import AppCommits from './AppCommits.vue'
+	import axios from 'axios'
 	export default {
 		data() {
 			return {
@@ -48,6 +59,9 @@
 				textareaType: '',
 				summary: [],
 				disabled: true,
+				isLoading: true,
+				commits: [],
+				showCommits: false,
 			}
 		},
 		methods: {
@@ -58,10 +72,20 @@
 				})
 				this.selectType = 'Заголовок'
 				this.textareaType = ''
+			},
+			async getCommits() {
+				this.showCommits = true
+				const {data} = await axios.get('https://vue-with-http-30bc6-default-rtdb.firebaseio.com/commits.json')
+
+				setTimeout(() => {
+					this.commits = data
+					this.isLoading = false
+				}, 1200);
 			}
 		},
 		components: {
-			AppSummary
+			AppSummary,
+			AppCommits,
 		},
 		watch: {
 			textareaType: function() {
@@ -96,9 +120,8 @@
 		border-radius: 10px;
 	}
 
-	.comments {
-		background-color: #fff;
-		border-radius: 10px;
-		padding: 15px;
+	.loading {
+		color: #fff;
+		font-weight: 700;
 	}
 </style>
