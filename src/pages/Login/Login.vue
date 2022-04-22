@@ -1,5 +1,5 @@
 <template>
-    <div class="about">
+    <div>
 
     </div>
 </template>
@@ -11,8 +11,5 @@
 </script>
 
 <style lang="scss" scoped>
-    .about {
-        height: 100vh;
-        background-color: #35356a;
-    }
+    @import './styles/login.scss'
 </style>

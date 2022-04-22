@@ -1,8 +1,8 @@
 
 import {createRouter, createWebHistory} from 'vue-router'
-import Home from './pages/Home'
-import About from './pages/About'
-import Contacts from './pages/Contacts'
+import Home from './pages/Home/Home'
+import About from './pages/About/About'
+import Contacts from './pages/Contacts/Contacts'
 
 export default createRouter({
     history: createWebHistory(),

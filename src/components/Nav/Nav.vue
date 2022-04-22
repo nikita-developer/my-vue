@@ -12,8 +12,6 @@
     }
 </script>
 
-<style lang="scss" scoped>
-    .active {
-        color: red;
-    }
+<style lang="scss">
+    @import './styles/nav'
 </style>
