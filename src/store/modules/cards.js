@@ -4,7 +4,7 @@ export default {
         cards: [],
     },
     actions: {
-        getCards(context, cards) {
+        loadCards(context, cards) {
             context.commit('loadCards', cards)
         },
         deleted(context, id) {
@@ -17,6 +17,11 @@ export default {
         },
         deleted(state, id) {
             state.cards.splice(id, 1)
+        }
+    },
+    getters: {
+        getCards(state) {
+            return state.cards
         }
     }
 }

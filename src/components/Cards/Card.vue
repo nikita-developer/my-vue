@@ -13,19 +13,18 @@
 
 <script>
     import cards from '../../store/data'
+    import {mapGetters, mapActions, mapMutations} from 'vuex'
     export default {
         computed: {
-            cards() {
-                return this.$store.state.cards.cards
-            }
+            ...mapGetters({
+                cards: 'getCards'
+            }),
         },
         methods: {
-            deletedCard(cards) {
-                this.$store.dispatch('deleted', () => cards.forEach(i))
-            }
+            ...mapActions(['loadCards'])
         },
         created() {
-            this.$store.dispatch('getCards', cards)
+            this.loadCards(cards)
         },
     }
 </script>
