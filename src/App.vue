@@ -11,33 +11,10 @@
 	import Main from './components/Main/Main.vue'
 	import Footer from './components/Footer/Footer.vue'
 	export default {
-		data() {
-			return {
-				isAuth: false
-			}
-		},
-
-		methods: {
-			login() {
-				this.isAuth = true
-				this.$router.push('/home')
-				console.log(123)
-			},
-			logout() {
-				this.isAuth = false
-				this.$router.push('/login')
-			},
-		},
 		components: {
 			Header,
 			Main,
 			Footer,
-		},
-		provide() {
-			return {
-				login: this.login,
-				logout: this.logout,
-			}
 		},
 	}
 </script>
