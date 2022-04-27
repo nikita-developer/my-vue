@@ -5,7 +5,7 @@
             type="text" 
             :placeholder="placeholder"
             :value="value"
-            @input="changeValue"
+            @input="(e) => this.$emit('onValue', e.target.value)"
         >
     </div>
 </template>
@@ -22,12 +22,6 @@
                 default: 'Просто текст',
             }
         },
-        methods: {
-            changeValue(e) {
-                this.text = e.target.value
-                this.$emit('messChange', this.text)
-            }
-        }
     }
 </script>
 

@@ -5,10 +5,9 @@
             <div class="login__box">
                 <div class="login__item">
                     <Label>
-                        <Field :value="value" @messChange="value = $event" />
+                        <Field @onValue="value = $event" />
                     </Label>
                 </div>
-                <p>{{value}}</p>
                 <Button text="Отправить"/>
             </div>
         </form>
@@ -30,11 +29,6 @@
             Field,
             Button,
         },
-        methods: {
-            submit() {
-                console.log(123);
-            }
-        }
     }
 </script>
 
