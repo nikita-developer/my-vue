@@ -5,7 +5,7 @@
             <div class="login__box">
                 <div class="login__item">
                     <Label>
-                        <Field v-model:value="value" />
+                        <Field :value="value" @messChange="value = $event" />
                     </Label>
                 </div>
                 <p>{{value}}</p>

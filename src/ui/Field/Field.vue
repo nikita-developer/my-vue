@@ -1,5 +1,13 @@
 <template>
-    <input class="field" type="text" :placeholder="placeholder">
+    <div>
+        <input 
+            class="field" 
+            type="text" 
+            :placeholder="placeholder"
+            :value="value"
+            @input="changeValue"
+        >
+    </div>
 </template>
 
 <script>
@@ -11,7 +19,13 @@
             },
             value: {
                 type: String,
-                default: '',
+                default: 'Просто текст',
+            }
+        },
+        methods: {
+            changeValue(e) {
+                this.text = e.target.value
+                this.$emit('messChange', this.text)
             }
         }
     }
