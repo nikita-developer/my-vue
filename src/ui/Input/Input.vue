@@ -22,7 +22,6 @@
                 id: 'input-' + Math.random()
             }
         },
-        emits: ['update:modelValue'],
         props: {
             modelValue: String,
             title: {

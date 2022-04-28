@@ -5,9 +5,17 @@
             <div class="login__box">
                 <Input
                     title="Логин"
+                    :message="login.message"
+                    :className="login.className"
                     v-model="login.value"
                 />
-                <p>{{login.value}}</p>
+                <Input
+                    type="password"
+                    title="Пароль"
+                    :message="password.message"
+                    :className="password.className"
+                    v-model="password.value"
+                />
                 <Button text="Отправить"/>
             </div>
         </form>
@@ -22,42 +30,49 @@
         data() {
             return {
                 login: {
-                    value: ''
-                }
+                    value: null,
+                    message: null,
+                    className: null,
+                },
+                password: {
+                    value: null,
+                    message: null,
+                    className: null,
+                },
             }
         },
-        // methods: {
-        //     submit() {
-        //         if(this.formIsValid()) {
-        //             console.log('форма отправлена');
-        //         }
-        //     },
-        //     formIsValid() {
-        //         let isValid = true
+        methods: {
+            submit() {
+                if(this.formIsValid()) {
+                    console.log('форма отправлена');
+                }
+            },
+            formIsValid() {
+                let isValid = true
 
-        //         // проверка логина
-        //         if(!this.login.value) {
-        //             this.login.message = 'Логин не может быть пустым'
-        //             this.login.className = 'error'
-        //             isValid = false
-        //         } else {
-        //             this.login.message = null
-        //             this.login.className = null
-        //         }
+                // проверка логина
+                if(!this.login.value) {
+                    this.login.message = 'Логин не может быть пустым'
+                    this.login.className = 'error'
+                    isValid = false
+                } else {
+                    this.login.message = null
+                    this.login.className = null
+                }
 
-        //         // проверка пароля
-        //         if(!this.password.value) {
-        //             this.password.message = 'Пароль не может быть пустым'
-        //             this.password.className = 'error'
-        //             isValid = false
-        //         } else {
-        //             this.password.message = null
-        //             this.password.className = null
-        //         }
-
-        //         return isValid
-        //     }
-        // },
+                // проверка пароля
+                if(!this.password.value) {
+                    this.password.message = 'Пароль не может быть пустым'
+                    this.password.className = 'error'
+                    isValid = false
+                } else {
+                    this.password.message = null
+                    this.password.className = null
+                }
+                
+                return isValid
+            }
+        },
         components: {
             Input,
             Button,
