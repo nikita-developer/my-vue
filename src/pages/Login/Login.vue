@@ -3,11 +3,11 @@
         <form @submit.prevent="submit" class="login">
             <div class="login__title">Что-бы продолжить, нужно войти!</div>
             <div class="login__box">
-                <div class="login__item">
-                    <Label>
-                        <Field @onValue="value = $event" />
-                    </Label>
-                </div>
+                <Input
+                    title="Логин"
+                    v-model="login.value"
+                />
+                <p>{{login.value}}</p>
                 <Button text="Отправить"/>
             </div>
         </form>
@@ -15,18 +15,51 @@
 </template>
 
 <script>
-    import Field from '../../ui/Field/Field.vue'
-    import Label from '../../ui/Label/Label.vue'
+    import Input from '../../ui/Input/Input.vue'
     import Button from '../../ui/Button/Button.vue'
+
     export default {
         data() {
             return {
-                value: ''
+                login: {
+                    value: ''
+                }
             }
         },
+        // methods: {
+        //     submit() {
+        //         if(this.formIsValid()) {
+        //             console.log('форма отправлена');
+        //         }
+        //     },
+        //     formIsValid() {
+        //         let isValid = true
+
+        //         // проверка логина
+        //         if(!this.login.value) {
+        //             this.login.message = 'Логин не может быть пустым'
+        //             this.login.className = 'error'
+        //             isValid = false
+        //         } else {
+        //             this.login.message = null
+        //             this.login.className = null
+        //         }
+
+        //         // проверка пароля
+        //         if(!this.password.value) {
+        //             this.password.message = 'Пароль не может быть пустым'
+        //             this.password.className = 'error'
+        //             isValid = false
+        //         } else {
+        //             this.password.message = null
+        //             this.password.className = null
+        //         }
+
+        //         return isValid
+        //     }
+        // },
         components: {
-            Label,
-            Field,
+            Input,
             Button,
         },
     }
