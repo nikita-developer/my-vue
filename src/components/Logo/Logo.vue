@@ -1,7 +1,5 @@
 <template>
-    <div class="footer">
-        footer
-    </div>
+    <router-link class="logo" to="/">Cdek</router-link>
 </template>
 
 <script>
@@ -11,5 +9,5 @@
 </script>
 
 <style lang="scss" scoped>
-    @import './styles/footer'
+
 </style>

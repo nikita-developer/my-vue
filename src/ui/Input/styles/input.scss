@@ -1,0 +1,18 @@
+.input {
+    margin-bottom: 15px;
+}
+
+.input__label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input__field {
+    display: block;
+    width: 100%;
+    padding: 5px;
+}
+
+.input__message {
+    color: var(--my-red);
+}

@@ -3,12 +3,20 @@ import {createRouter, createWebHistory} from 'vue-router'
 import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 
-export default createRouter({
+const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {path: '/home', component: Home, alias: '/'},
-        {path: '/login', component: Login},
+        {
+            path: '/home', 
+            component: Home
+        },
+        {
+            path: '/login', 
+            component: Login
+        },
     ],
     linkActiveClass: 'active',
     linkExactActiveClass: 'active',
 })
+
+export default router

@@ -16,7 +16,7 @@
                     :className="password.className"
                     v-model="password.value"
                 />
-                <Button text="Отправить"/>
+                <Button class="login__btn" text="Отправить"/>
             </div>
         </form>
     </div>
@@ -44,7 +44,7 @@
         methods: {
             submit() {
                 if(this.formIsValid()) {
-                    console.log('форма отправлена');
+                    console.log(this.$store.getters.allLogin);
                 }
             },
             formIsValid() {
@@ -81,5 +81,5 @@
 </script>
 
 <style lang="scss" scoped>
-
+    @import './styles/login'
 </style>

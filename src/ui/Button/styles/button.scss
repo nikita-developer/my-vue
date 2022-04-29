@@ -2,16 +2,10 @@
 .button {
     border: 0;
     padding: .5em 1.5em;
-    border-radius: .5em;
     color: var(--my-white);
-
-    &__primary {
-        background-color: var(--my-primary);
-    }
-
-    &__success {
-        background-color: var(--my-success);
-    }
+    background-color: var(--my-black);
+    border: 1px solid var(--my-white);
+    cursor: pointer;
 
     &:hover {
         opacity: .9;

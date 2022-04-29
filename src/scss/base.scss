@@ -3,8 +3,9 @@ body {
 	margin: 0;
 	padding: 0;
     font-size: 16px;
-    color: var(--dark);
+    color: var(--my-white);
     font-family: sans-serif;
+    background-color: var(--my-black);
 }
 
 * {
@@ -24,4 +25,8 @@ img {
     flex-direction: column;
     justify-content: space-between;
     min-height: 100vh;
+}
+
+a {
+    color: inherit;
 }

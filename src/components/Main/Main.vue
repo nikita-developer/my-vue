@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main">
         <router-view></router-view>
     </div>
 </template>
@@ -11,5 +11,5 @@
 </script>
 
 <style lang="scss" scoped>
-
+    @import './styles/main'
 </style>

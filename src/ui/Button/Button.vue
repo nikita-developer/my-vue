@@ -15,7 +15,7 @@
             },
             myClass: {
                 type: String,
-                default: 'button__primary',
+                default: '',
             },
         },
     }
