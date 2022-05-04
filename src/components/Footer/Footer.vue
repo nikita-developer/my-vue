@@ -1,6 +1,6 @@
 <template>
-    <div class="footer">
-        footer
+    <div class="footer bg-dark text-center pt-3 pb-3">
+        Copyright
     </div>
 </template>
 

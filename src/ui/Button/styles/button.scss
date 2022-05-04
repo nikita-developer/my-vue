@@ -1,17 +1,4 @@
 
 .button {
-    border: 0;
-    padding: .5em 1.5em;
-    color: var(--my-white);
-    background-color: var(--my-black);
-    border: 1px solid var(--my-white);
-    cursor: pointer;
-
-    &:hover {
-        opacity: .9;
-    }
-
-    &:active {
-        transform: scale(.98);
-    }
+    
 }
