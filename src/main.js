@@ -8,6 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './scss/main.scss'
 
 createApp(App)
-    .use(router)
     .use(store)
+    .use(router)
     .mount('#app')

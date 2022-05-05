@@ -4,12 +4,12 @@
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <router-link class="nav-link" to="/home">Главная</router-link>
+                    <router-link class="nav-link" to="/">Главная</router-link>
                 </li>
-                <li class="nav-item">
+                <li v-if="this.$store.getters.isLogin" class="nav-item">
                     <router-link class="nav-link" to="/registration">Регистрация</router-link>
                 </li>
-                <li class="nav-item">
+                <li v-if="this.$store.getters.isLogin" class="nav-item">
                     <router-link class="nav-link" to="/login">Войти</router-link>
                 </li>
             </ul>
