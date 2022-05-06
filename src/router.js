@@ -2,7 +2,6 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
-import Registration from './pages/Registration/Registration'
 import store from './store/store.js'
 
 const router = createRouter({
@@ -11,21 +10,16 @@ const router = createRouter({
         {
             path: '/', 
             component: Home,
+            meta: {
+                login: true
+            }
         },
         {
             path: '/login', 
             component: Login,
             name: 'login',
             meta: {
-                login: true
-            }
-        },
-        {
-            path: '/registration', 
-            component: Registration,
-            name: 'registration',
-            meta: {
-                login: true
+                login: false
             }
         },
     ],
@@ -40,7 +34,9 @@ router.beforeEach((to, from, next) => {
         store.commit('auth')
     }
 
-    if(requireUser && requireAuth) {
+    if(requireUser && !requireAuth) {
+        next('/login')
+    } else if (!requireUser && requireAuth) {
         next('/')
     } else {
         next()

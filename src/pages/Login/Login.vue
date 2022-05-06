@@ -34,11 +34,26 @@
         methods: {
             submit() {
                 if(this.formIsValid()) {
+                    let formData = new FormData()
+                    formData.append('login', this.login.value)
+                    formData.append('password', this.password.value)
+
                     this.login.value = null
                     this.login.message = null
-                    this.$store.commit('auth')
-                    this.$router.push('/')
-                    localStorage.setItem('cdek-auth', true)
+                    this.password.value = null
+                    this.password.message = null
+
+                    this.setAuth(formData)
+
+                    // this.$store.commit('auth')
+                    // this.$router.push('/')
+                    // localStorage.setItem('cdek-auth', true)
+
+
+                    
+                    // for (var pair of formData.entries()) {
+                    //     console.log(pair[0]+ ', '+ pair[1]); 
+                    // }
                 }
             },
             formIsValid() {
@@ -56,7 +71,29 @@
                     isValid = false
                 }
                 return isValid
+            },
+
+            async setAuth(formData) {
+                const fetchResp = await fetch('http://spasdeveloper.ru/cdek/php/auth/auth.php', {
+                    method: 'POST',
+                    body: {login: '111111111'},
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+
+                const json = await fetchResp.json();
+                console.log(json.message)
             }
+
+
+            // method: 'POST',
+            // url: 'http://spasdeveloper.ru/my-app/php/authorization/authorization.php',
+            // headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            // data: {
+            //     login: login,
+            //     password: password,
+            // }
         },
     }
 </script>

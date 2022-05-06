@@ -1,10 +1,10 @@
 export default {
     state: {
-        isAuth: true,
+        isAuth: false,
     },
     mutations: {
         auth(state) {
-            state.isAuth = false
+            state.isAuth = true
         }
     },
     getters: {
