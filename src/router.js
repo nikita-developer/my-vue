@@ -29,7 +29,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const requireUser = to.meta.login
-    const requireAuth = localStorage.getItem('cdek-auth')
+    const requireAuth = localStorage.getItem('cdek-auth') == store.getters.token ? true : false
+    
     if(requireAuth) {
         store.commit('auth')
     }
