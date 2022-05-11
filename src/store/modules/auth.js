@@ -1,7 +1,7 @@
 export default {
     state: {
         isAuth: false,
-        token: 'welcome-klo',
+        token: '',
     },
     mutations: {
         auth(state) {
@@ -17,6 +17,12 @@ export default {
         },
         token(state) {
             return state.token
+        },
+        async updateToken(state) {
+            let response = await fetch('http://spasdeveloper.ru/cdek/php/auth/token.php')
+            let result = await response.json()
+            console.log(result);
+            return state.token = result
         }
     }
 }

@@ -16,6 +16,9 @@
 			Main,
 			Footer,
 		},
+		mounted() {
+			this.$store.getters.updateToken
+		}
 	}
 </script>
 
