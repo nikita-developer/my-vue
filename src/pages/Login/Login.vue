@@ -12,7 +12,7 @@
                 <input v-model.trim="password.value" type="password" class="form-control" placeholder="Введите пароль">
                 <small class="form-text text-danger">{{password.message}}</small>
             </div>
-            <div v-if="info" class="form-group mb-3"><small class="form-text text-danger">{{info}}</small></div>
+            <div v-if="error" class="form-group mb-3"><small class="form-text text-danger">{{error}}</small></div>
             <button class="btn btn-primary w-100">Войти</button>
         </form>
     </div>
@@ -30,25 +30,27 @@
                     value: null,
                     message: null,
                 },
-                info: null,
+            }
+        },
+        computed: {
+            error() {
+                return this.$store.getters.ERROR
             }
         },
         methods: {
-            async submit() {
-                if(this.formIsValid() && await this.setAuth(this.login.value, this.password.value)) {
-                    let cdek_token = await this.setAuth(this.login.value, this.password.value)
+            submit() {
+                if(this.formIsValid()) {
+                    let payload = {
+                        login: this.login.value,
+                        password: this.password.value
+                    }
+
+                    this.$store.dispatch('GET_AUTH', payload)
 
                     this.login.value = null
                     this.login.message = null
                     this.password.value = null
                     this.password.message = null
-                    this.info = null
-
-                    this.$store.commit('auth')
-                    this.$router.push('/')
-                    localStorage.setItem('cdek-auth', cdek_token)
-                } else {
-                    this.info = 'Нет такого логина или пароля'
                 }
             },
             formIsValid() {
@@ -72,23 +74,6 @@
 
                 return isValid
             },
-
-            async setAuth(login, password) {
-                let response = await fetch('http://spasdeveloper.ru/cdek/php/auth/auth.php', {
-                    method: 'POST',
-                    body: JSON.stringify(
-                        {
-                            login: login,
-                            password: password
-                        }
-                    ),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-                let result = await response.json()
-                return result
-            }
         },
     }
 </script>

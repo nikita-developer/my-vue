@@ -16,8 +16,8 @@
 			Main,
 			Footer,
 		},
-		mounted() {
-			this.$store.getters.updateToken
+		async created () {
+			await this.$store.dispatch('GET_TOKEN')
 		}
 	}
 </script>
