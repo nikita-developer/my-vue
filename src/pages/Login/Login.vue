@@ -30,27 +30,38 @@
                     value: null,
                     message: null,
                 },
-            }
-        },
-        computed: {
-            error() {
-                return this.$store.getters.ERROR
+                error: null
             }
         },
         methods: {
-            submit() {
+            async submit() {
                 if(this.formIsValid()) {
-                    let payload = {
-                        login: this.login.value,
-                        password: this.password.value
+                    let response = await fetch('http://spasdeveloper.ru/cdek/php/auth/auth.php', {
+                        method: 'POST',
+                        body: JSON.stringify(
+                            {
+                                login: this.login.value,
+                                password: this.password.value
+                            }
+                        ),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+                    let data = await response.json()
+                    if(data) {
+                        this.error = null
+                        this.$store.dispatch('GET_AUTH', data)
+                        localStorage.setItem('cdek-auth', this.$store.getters.TOKEN)
+                        this.$router.push('/')
+
+                        this.login.value = null
+                        this.login.message = null
+                        this.password.value = null
+                        this.password.message = null
+                    } else {
+                        this.error = 'Нет такого логина или пароля'
                     }
-
-                    this.$store.dispatch('GET_AUTH', payload)
-
-                    this.login.value = null
-                    this.login.message = null
-                    this.password.value = null
-                    this.password.message = null
                 }
             },
             formIsValid() {

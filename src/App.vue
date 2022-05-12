@@ -16,9 +16,6 @@
 			Main,
 			Footer,
 		},
-		async created () {
-			await this.$store.dispatch('GET_TOKEN')
-		}
 	}
 </script>
 

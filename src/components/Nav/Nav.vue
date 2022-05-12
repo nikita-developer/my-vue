@@ -2,7 +2,7 @@
     <nav class="nav navbar navbar-expand-md navbar-dark bg-primary">
         <Logo class="navbar-brand" />
         <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav" v-if="this.$store.getters.isLogin">
+            <ul class="navbar-nav" v-if="this.$store.getters.AUTH">
                 <li class="nav-item active">
                     <router-link class="nav-link" to="/">Главная</router-link>
                 </li>

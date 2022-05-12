@@ -17,10 +17,6 @@ const router = createRouter({
         {
             path: '/login', 
             component: Login,
-            name: 'login',
-            meta: {
-                login: false
-            }
         },
     ],
     linkActiveClass: 'active',
@@ -28,17 +24,21 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const requireUser = to.meta.login
-    const requireAuth = localStorage.getItem('cdek-auth') == store.getters.TOKEN ? true : false
-    console.log(store.getters.TOKEN);
+    fetch('http://spasdeveloper.ru/cdek/php/auth/token.php')
+    .then(response => response.json())
+    .then(data => {
+        store.dispatch('GET_TOKEN', data)
+        const requireUser = to.meta.login
+        const requireAuth = localStorage.getItem('cdek-auth') == store.getters.TOKEN ? true : false
 
-    if(requireUser && !requireAuth) {
-        next('/login')
-    } else if (!requireUser && requireAuth) {
-        next('/')
-    } else {
-        next()
-    }
+        if(requireUser && !requireAuth) {
+            next('/login')
+        } else if(!requireUser && requireAuth) {
+            next('/')
+        } else {
+            next()
+        }
+    })
 })
 
 export default router
