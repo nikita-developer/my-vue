@@ -4,6 +4,7 @@ import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import About from './pages/About/About'
 import NotFound from './pages/NotFound/NotFound'
+import JobSchedule from './pages/JobSchedule/JobSchedule'
 import store from './store/store.js'
 
 const router = createRouter({
@@ -19,6 +20,13 @@ const router = createRouter({
         {
             path: '/about', 
             component: About,
+            meta: {
+                all: true
+            }
+        },
+        {
+            path: '/job-schedule', 
+            component: JobSchedule,
             meta: {
                 all: true
             }
@@ -48,7 +56,6 @@ router.beforeEach((to, from, next) => {
     fetch('http://spasdeveloper.ru/cdek/php/auth/token.php')
     .then(response => response.text())
     .then(data => {
-        console.log(data);
         store.dispatch('GET_TOKEN', data)
         
         const requireAuth = localStorage.getItem('cdek-auth') == store.getters.TOKEN

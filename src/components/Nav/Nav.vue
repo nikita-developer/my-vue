@@ -1,22 +1,23 @@
 <template>
-    <nav class="nav navbar navbar-expand-md navbar-dark bg-primary">
-        <Logo class="navbar-brand" />
-        <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
-                <li class="nav-item active" v-if="this.$store.getters.AUTH">
-                    <router-link class="nav-link" to="/">Главная</router-link>
-                </li>
-                <li class="nav-item active">
-                    <router-link class="nav-link" to="/about">О нас</router-link>
-                </li>
-                <li class="nav-item active" v-if="!this.$store.getters.AUTH">
-                    <router-link class="nav-link" to="/login">Войти</router-link>
-                </li>
-                <li @click="logOut" class="nav-item active" v-if="this.$store.getters.AUTH">
-                    <router-link class="nav-link" to="/login">Выйти</router-link>
-                </li>
-            </ul>
-        </div>
+    <nav class="nav bg-primary">
+        <Logo class="logo" />
+        <ul class="nav__list">
+            <li class="nav__item" v-if="this.$store.getters.AUTH">
+                <router-link class="nav__link" to="/">Главная</router-link>
+            </li>
+            <li class="nav__item" v-if="this.$store.getters.AUTH">
+                <router-link class="nav__link" to="/job-schedule">График дежурств</router-link>
+            </li>
+            <li class="nav__item">
+                <router-link class="nav__link" to="/about">О нас</router-link>
+            </li>
+            <li class="nav__item" v-if="!this.$store.getters.AUTH">
+                <router-link class="nav__link" to="/login">Войти</router-link>
+            </li>
+            <li @click="logOut" class="nav__item" v-if="this.$store.getters.AUTH">
+                <router-link class="nav__link" to="/login">Выйти</router-link>
+            </li>
+        </ul>
     </nav>
 </template>
 

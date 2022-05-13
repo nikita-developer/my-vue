@@ -1,5 +1,7 @@
 <template>
-    <router-link class="logo" to="/">Cdek</router-link>
+    <div>
+
+    </div>
 </template>
 
 <script>
@@ -9,5 +11,5 @@
 </script>
 
 <style lang="scss" scoped>
-    @import './styles/logo.scss';
+    @import './styles/jobs-chedule.scss';
 </style>
