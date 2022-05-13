@@ -46,9 +46,9 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     fetch('http://spasdeveloper.ru/cdek/php/auth/token.php')
-    .then(response => response.json())
+    .then(response => response.text())
     .then(data => {
-
+        console.log(data);
         store.dispatch('GET_TOKEN', data)
         
         const requireAuth = localStorage.getItem('cdek-auth') == store.getters.TOKEN
