@@ -1,15 +1,13 @@
 <template>
-    <div class="home">
-        <h1>Главная</h1>
+    <div class="about">
+        <h1>О нас</h1>
     </div>
 </template>
 
 <script>
-    export default {
-
-    }
+    
 </script>
 
 <style lang="scss" scoped>
-
+    @import './styles/about'
 </style>

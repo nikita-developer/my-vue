@@ -16,11 +16,10 @@ export default {
     mutations: {
         SET_TOKEN: (state, payload) => {
             state.token = payload
-            state.auth = true
         },
 
         SET_AUTH: (state, payload) => {
-            state.token = payload
+            state.auth = payload
         },
     },
     getters: {

@@ -51,7 +51,8 @@
                     let data = await response.json()
                     if(data) {
                         this.error = null
-                        this.$store.dispatch('GET_AUTH', data)
+                        this.$store.dispatch('GET_TOKEN', data)
+                        this.$store.dispatch('GET_AUTH', true)
                         localStorage.setItem('cdek-auth', this.$store.getters.TOKEN)
                         this.$router.push('/')
 
