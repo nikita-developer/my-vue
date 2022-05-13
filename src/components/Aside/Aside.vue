@@ -1,6 +1,6 @@
 <template>
-    <div>
-
+    <div class="aside">
+        <h1>Aside</h1>
     </div>
 </template>
 
@@ -11,5 +11,5 @@
 </script>
 
 <style lang="scss" scoped>
-    @import './styles/jobs-chedule.scss';
+    @import './styles/aside.scss';
 </style>

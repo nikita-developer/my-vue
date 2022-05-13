@@ -6,7 +6,7 @@
                 <router-link class="nav__link" to="/">Главная</router-link>
             </li>
             <li class="nav__item" v-if="this.$store.getters.AUTH">
-                <router-link class="nav__link" to="/job-schedule">График дежурств</router-link>
+                <router-link class="nav__link" to="/job">График дежурств</router-link>
             </li>
             <li class="nav__item">
                 <router-link class="nav__link" to="/about">О нас</router-link>

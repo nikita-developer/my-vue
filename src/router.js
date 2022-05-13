@@ -3,8 +3,8 @@ import {createRouter, createWebHistory} from 'vue-router'
 import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import About from './pages/About/About'
+import Job from './pages/Job/Job'
 import NotFound from './pages/NotFound/NotFound'
-import JobSchedule from './pages/JobSchedule/JobSchedule'
 import store from './store/store.js'
 
 const router = createRouter({
@@ -25,8 +25,8 @@ const router = createRouter({
             }
         },
         {
-            path: '/job-schedule', 
-            component: JobSchedule,
+            path: '/job', 
+            component: Job,
             meta: {
                 all: true
             }
