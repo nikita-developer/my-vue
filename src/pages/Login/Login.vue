@@ -1,7 +1,7 @@
 <template>
     <div class="login-wrap">
         <form @submit.prevent="submit" class="form login">
-            <h3 class="form__title mb-3">Войти в систему</h3>
+            <h3 class="form__title mb-3">Войти в систему 1</h3>
             <div class="form-group mb-2">
                 <label for="" class="text-muted">Логин</label>
                 <input v-model.trim="login.value" type="text" class="form-control" placeholder="Введите логин">
