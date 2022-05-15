@@ -11,39 +11,39 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/', 
+            path: '/',
             component: Home,
             meta: {
                 login: true
             }
         },
         {
-            path: '/about', 
+            path: '/about',
             component: About,
             meta: {
                 all: true
             }
         },
         {
-            path: '/job', 
+            path: '/job',
             component: Job,
             meta: {
                 all: true
             }
         },
         {
-            path: '/login', 
+            path: '/login',
             component: Login,
             meta: {
                 myLogin: true
             }
         },
-        { 
+        {
             path: '/404',
             name: '404',
             component: NotFound,
         },
-        { 
+        {
             path: "/:catchAll(.*)",
             redirect: '/404'
         }
@@ -54,10 +54,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     fetch('http://spasdeveloper.ru/cdek/php/auth/token.php')
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
         store.dispatch('GET_TOKEN', data)
-        
+
         const requireAuth = localStorage.getItem('cdek-auth') == store.getters.TOKEN
 
         if(requireAuth) {

@@ -48,7 +48,7 @@
                             "Content-Type": "application/json"
                         }
                     })
-                    let data = await response.text()
+                    let data = await response.json()
                     if(data) {
                         this.error = null
                         this.$store.dispatch('GET_TOKEN', data)
