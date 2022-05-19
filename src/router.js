@@ -4,6 +4,8 @@ import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import About from './pages/About/About'
 import Job from './pages/Job/Job'
+import ScheduleJob from './pages/Job/ScheduleJob'
+import ReportJob from './pages/Job/ReportJob'
 import NotFound from './pages/NotFound/NotFound'
 import store from './store/store.js'
 
@@ -29,7 +31,17 @@ const router = createRouter({
             component: Job,
             meta: {
                 all: true
-            }
+            },
+            children: [
+                {
+                    path: '',
+                    component: ScheduleJob,
+                },
+                {
+                    path: '/job/report-job',
+                    component: ReportJob,
+                }
+            ]
         },
         {
             path: '/login',

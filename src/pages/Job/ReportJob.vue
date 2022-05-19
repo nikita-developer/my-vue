@@ -1,6 +1,6 @@
 <template>
-    <div class="aside">
-        <slot name="content"></slot>
+    <div>
+        <h3>sdfs</h3>
     </div>
 </template>
 
@@ -11,5 +11,5 @@
 </script>
 
 <style lang="scss" scoped>
-    @import './styles/aside.scss';
+
 </style>

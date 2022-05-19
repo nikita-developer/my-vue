@@ -1,8 +1,19 @@
 <template>
     <div class="job main-aside">
-        <Aside></Aside>
+        <Aside>
+            <template #content>
+                <div class="job__nav">
+                    <div class="job__nav-item">
+                        <router-link class="job__nav-link" to="/job">График работы</router-link>
+                    </div>
+                    <div class="job__nav-item">
+                        <router-link class="job__nav-link" to="/job/report-job">Отчеты</router-link>
+                    </div>
+                </div>
+            </template>
+        </Aside>
         <div class="job__body">
-            <h1>Работа</h1>
+            <router-view></router-view>
         </div>
     </div>
 </template>
